@@ -1,0 +1,32 @@
+classDiagram
+    class Owner {
+        +String name
+        +String email
+        +List~Pet~ pets
+        +addPet(pet)
+        +removePet(pet)
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +List~Task~ tasks
+        +addTask(task)
+        +removeTask(task)
+    }
+
+    class Task {
+        +String title
+        +String description
+        +String time
+        +String status
+        +markComplete()
+    }
+
+    class Scheduler {
+        +generatePlan(tasks)
+    }
+
+    Owner "1" --> "1..*" Pet : owns
+    Pet "1" --> "0..*" Task : has
+    Scheduler ..> Task : uses
