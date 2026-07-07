@@ -47,39 +47,50 @@ pip install -r requirements.txt
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
 ```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
+Today's Schedule
+----------------------------------------
+Time: 08:00 | Pet: Buddy | Task: Morning meal | Priority: High | Status: Pending
+Time: 12:00 | Pet: Luna | Task: Clean litter box | Priority: High | Status: Pending
+Time: 16:00 | Pet: Buddy | Task: Afternoon walk | Priority: Medium | Status: Pending
 ```
 
 ## 🧪 Testing PawPal+
 
+Run the automated test suite with:
+
 ```bash
-# Run the full test suite:
-pytest
-
-# Run with coverage:
-pytest --cov
+python -m pytest
 ```
 
-Sample test output:
+The tests cover the main scheduling behaviors, including:
+- Task completion and recurrence logic
+- Sorting tasks chronologically
+- Filtering tasks
+- Conflict detection
+- Handling edge cases
 
+Example successful test output:
+
+```text
+6 passed in 0.65s
 ```
-# Paste your pytest output here
-```
+
+Confidence Level: ⭐⭐⭐⭐⭐ (5/5)
+
+This confidence level is based on passing automated tests that cover the main scheduling behaviors in the project.
 
 ## 📐 Smarter Scheduling
 
 > Fill in once you've implemented scheduling logic.
 
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+
+| Feature            | Method(s)       |Notes                                                                     |
+| ------------------ | ------------------------------ | ------------------------------------------------------------------------- |
+| Task sorting       | `Scheduler.sort_by_time()`     | Sorts tasks chronologically by their scheduled time.                      |
+| Task filtering     | `Scheduler.filter_tasks()`     | Filters tasks by pet name and/or completion status.                       |
+| Conflict detection | `Scheduler.detect_conflicts()` | Returns warning messages when multiple tasks share the same time slot.    |
+| Recurring tasks    | `Task.mark_complete()`         | Creates the next daily or weekly task when a recurring task is completed. |
+
 
 ## 📸 Demo Walkthrough
 

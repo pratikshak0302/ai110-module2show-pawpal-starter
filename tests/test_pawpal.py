@@ -46,6 +46,26 @@ def test_pet_add_task_increases_task_list():
     assert task.pet is pet
 
 
+def test_scheduler_sort_by_time_returns_chronological_order():
+    """Verify that tasks are returned in chronological order."""
+    owner = Owner(name="Ava", available_time=180, preferences=["Morning care"])
+    buddy = Pet(name="Buddy", species="Dog", age=3)
+    owner.add_pet(buddy)
+
+    task1 = Task(name="Feed", description="Feed Buddy", scheduled_time="08:30", frequency="Daily", priority="High", duration=20)
+    task2 = Task(name="Walk", description="Walk Buddy", scheduled_time="14:00", frequency="Daily", priority="Medium", duration=30)
+    task3 = Task(name="Clean", description="Clean litter", scheduled_time="09:00", frequency="Daily", priority="Low", duration=15)
+
+    buddy.add_task(task1)
+    buddy.add_task(task2)
+    buddy.add_task(task3)
+
+    scheduler = Scheduler(owner=owner, available_time=120)
+    sorted_tasks = scheduler.sort_by_time(owner.get_all_tasks())
+
+    assert [task.name for task in sorted_tasks] == ["Feed", "Clean", "Walk"]
+
+
 def test_scheduler_sort_and_filter_tasks():
     """Verify that the scheduler can sort tasks by time and filter by pet and status."""
     owner = Owner(name="Ava", available_time=180, preferences=["Morning care"])
