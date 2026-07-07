@@ -1,0 +1,49 @@
+classDiagram
+    class Owner {
+        +String name
+        +int available_time
+        +List~String~ preferences
+        +List~Pet~ pets
+        +add_pet(pet)
+        +remove_pet(pet)
+        +get_all_tasks()
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +int age
+        +List~Task~ tasks
+        +add_task(task)
+        +remove_task(task)
+    }
+
+    class Task {
+        +String name
+        +String description
+        +String scheduled_time
+        +String frequency
+        +String priority
+        +int duration
+        +bool completed
+        +Pet pet
+        +date scheduled_date
+        +mark_complete()
+    }
+
+    class Scheduler {
+        +Owner owner
+        +int available_time
+        +get_pending_tasks()
+        +sort_by_time(tasks)
+        +filter_tasks(tasks, pet_name, completed)
+        +sort_tasks(tasks)
+        +detect_conflicts(tasks)
+        +generate_schedule()
+    }
+
+    Owner "1" --> "0..*" Pet : owns
+    Pet "1" --> "0..*" Task : has
+    Task --> Pet : belongs to
+    Scheduler --> Owner : uses
+    Scheduler --> Task : plans
